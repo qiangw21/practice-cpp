@@ -16,7 +16,7 @@ void print(wvector& vec)
 	}
 	else
 	{
-		cout << "This is empty vector!" << endl;
+		cout << "This is empty vector! ";
 		cout << "vec capacity: " << vec.capacity()
 			<< " vec size: " << vec.size() << "." << endl;
 	}
