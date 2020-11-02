@@ -25,10 +25,7 @@ namespace wq {
 
 	void wvector::push(int item)
 	{
-		if (m_size + 1 == m_capacity) {
-			m_capacity = 2 * m_capacity;
-			resize(m_capacity);
-		}
+		increaseSize();
 
 		m_data[m_size] = item;
 		++m_size;
@@ -41,10 +38,7 @@ namespace wq {
 				<< ", index = " << index << "." << std::endl;
 			exit(EXIT_FAILURE);
 		}
-		if (m_size + 1 == m_capacity) {
-			m_capacity *= kGrowthFactor;
-			resize(m_capacity);
-		}
+		increaseSize();
 
 		for (int i = m_size; i > index; --i) {
 			m_data[i] = m_data[i - 1];
@@ -63,10 +57,7 @@ namespace wq {
 	{
 		int ret = m_data[m_size - 1];
 		--m_size;
-		if (m_size <= m_capacity / kShrinkFactor) {
-			m_capacity /= 2;
-			resize(m_capacity);
-		}
+		decreaseSize();
 		return ret;
 	}
 
@@ -83,10 +74,7 @@ namespace wq {
 		}
 		--m_size;
 
-		if (m_size <= m_capacity / kShrinkFactor) {
-			m_capacity /= 2;
-			resize(m_capacity);
-		}
+		decreaseSize();
 	}
 
 	void wvector::remove(int item)
@@ -124,5 +112,20 @@ namespace wq {
 		}
 	}
 
+	void wvector::increaseSize()
+	{
+		if (m_size + 1 == m_capacity) {
+			m_capacity *= kGrowthFactor;
+			resize(m_capacity);
+		}
+	}
+
+	void wvector::decreaseSize()
+	{
+		if (m_size <= m_capacity / kShrinkFactor) {
+			m_capacity /= 2;
+			resize(m_capacity);
+		}
+	}
 
 }// namespace wq

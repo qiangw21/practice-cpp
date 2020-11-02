@@ -49,9 +49,9 @@ namespace wq {
 		//when popping an item, if size is 1 / 4 of capacity, resize to half
 		void resize(int new_capacity);
 		// Increases the capacity of the vector.
-		//void increaseSize();
+		void increaseSize();
 		// Decreases the capacity of the vector.
-		//void decreaseSize();
+		void decreaseSize();
 
 		std::unique_ptr<int[]> m_data;
 		int* m_new_ptr;
